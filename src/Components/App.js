@@ -1,6 +1,6 @@
 import React from "react";
 import RouterSetup from "./RouterSetup";
-import { BrowserRouter as Router } from "react-router-dom";
+import { HashRouter as Router } from "react-router-dom";
 
 const App = () => {
   return (
