@@ -9,6 +9,7 @@ const NavBarMobile = () => {
       style={{
         background: "none",
         padding: "0em",
+        margin: "0em",
       }}
       inverted
       id="fonts"

@@ -7,11 +7,13 @@ html {
 body #fonts {
   color: white;
   font-family: "Fira Code", monospace;
+  line-height: normal;
 }
 
 #font-fam {
   font-family: "Fira Code", monospace;
   font-weight: 500;
+  line-height: normal;
 }
 
 .nav-bar {

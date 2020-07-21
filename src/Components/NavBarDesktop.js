@@ -10,6 +10,7 @@ const NavBarDesktop = () => {
       style={{
         background: "none",
         padding: "0 1em",
+        margin: "0",
       }}
       inverted
       id="fonts"
