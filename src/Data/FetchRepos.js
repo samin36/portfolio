@@ -21,9 +21,12 @@ const getRepos = async () => {
   const filteredData = await Promise.all(
     data.map(async (repo) => {
       const languages = await parseLanguages(repo.languages_url);
+      const date = new Date(repo.created_at);
       return {
         name: repo.name,
-        created_at: repo.created_at,
+        created_at: `${date.getDate()} ${date.toLocaleString("default", {
+          month: "long",
+        })} ${date.getFullYear()}`,
         description: repo.description,
         homepage: repo.homepage,
         languages,
@@ -31,7 +34,7 @@ const getRepos = async () => {
       };
     })
   );
-  console.log(filteredData);
+  return filteredData;
 };
 
 export default getRepos;

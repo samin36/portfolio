@@ -1,51 +1,8 @@
 import React from "react";
 import { Header, Divider, Button, Card, List, Image } from "semantic-ui-react";
 import Pdf from "../Data/resume.pdf";
-
-const cardOptions = {
-  backgroundColor: "rgba(0, 6, 42, 0.5)",
-  borderRadius: "0.5em",
-  boxShadow: "0 2px 4px 0 rgb(255, 255, 255)",
-};
-
-const listOptions = {
-  fontWeight: 300,
-};
-
-const coursesTaken = [
-  "Data Structures and Algorithms",
-  "Object Oriented Programming",
-  "Design and Analysis of Algorithms",
-  "Computer Organization and Programming",
-  "Introduction to Artificial Intelligence",
-  "Introduction to Perception and Robotics",
-  "Objects and Software Design",
-];
-
-const internshipExperience = [
-  {
-    company: "Stonebranch",
-    startDate: "01/2020",
-    endDate: "05/2020",
-    logo: "/images/stonebranch.png",
-    logoSize: "mini",
-    achievements: [
-      "Deployed a script to upgrade version of Python across various legacy unix and linux systems",
-      "Edited makefiles and bash scripts to enable CI/CD",
-      "Modified C code to fix DNS issues faced by the customer",
-    ],
-  },
-  {
-    company: "Northrop Grumman",
-    startDate: "06/2020",
-    endDate: "08/2020",
-    logo: "/images/northrop.png",
-    logoSize: "tiny",
-    achievements: [
-      "Created Python scripts to programmatically format Excel data and export to SQL server",
-    ],
-  },
-];
+import { coursesTaken, internshipExperience } from "../Data/AboutMeData";
+import { cardOptions, listOptions } from "../Data/StylesOptions";
 
 const AboutMe = () => {
   return (
@@ -99,7 +56,6 @@ const AboutMe = () => {
             as="a"
             href={Pdf}
             target="_blank"
-            icon
           >
             Resume
           </Button>
