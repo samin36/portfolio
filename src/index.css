@@ -1,0 +1,22 @@
+@import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap");
+
+html {
+  scroll-behavior: smooth !important;
+}
+
+body #fonts {
+  color: white;
+  font-family: "Fira Code", monospace;
+}
+
+#font-fam {
+  font-family: "Fira Code", monospace;
+  font-weight: 500;
+}
+
+.nav-bar {
+  /* Frost Color */
+  background: #000428;
+  background: -webkit-linear-gradient(to bottom, #004e92, #000428);
+  background: linear-gradient(to bottom, #004e92, #000428);
+}
