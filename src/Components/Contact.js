@@ -8,6 +8,8 @@ import {
   Label,
   Form,
   Container,
+  Dimmer,
+  Loader,
 } from "semantic-ui-react";
 import axios from "axios";
 
@@ -20,6 +22,7 @@ const initialDetails = {
 
 const Contact = () => {
   const [formDetails, setFormDetails] = useState(initialDetails);
+  const [isSending, setIsSending] = useState(false);
 
   const handleChange = (e, { name, value }) => {
     setFormDetails((prevState) => {
@@ -28,17 +31,17 @@ const Contact = () => {
   };
 
   const handleSubmit = () => {
-    console.log(formDetails);
-
+    setIsSending(true);
     axios
-      .post("/api/sendemail", {
-        client: "This is the client!",
-      })
+      .post("/api/sendemail", formDetails)
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setIsSending(false);
       });
 
     setFormDetails(initialDetails);
@@ -46,6 +49,9 @@ const Contact = () => {
 
   return (
     <Container text style={{ marginTop: "2em" }}>
+      <Dimmer active={isSending}>
+        <Loader>Sending</Loader>
+      </Dimmer>
       <Card style={cardOptions} centered fluid>
         <Card.Content>
           <Header as="h3" icon textAlign="center">
