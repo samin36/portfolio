@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import CustomModal from "./CustomModal";
 import { cardOptions } from "../Data/StylesOptions";
 import {
   Card,
@@ -23,6 +24,7 @@ const initialDetails = {
 const Contact = () => {
   const [formDetails, setFormDetails] = useState(initialDetails);
   const [isSending, setIsSending] = useState(false);
+  const [wasSuccessfullySent, setWasSuccessfullySent] = useState(null);
 
   const handleChange = (e, { name, value }) => {
     setFormDetails((prevState) => {
@@ -35,10 +37,10 @@ const Contact = () => {
     axios
       .post("/api/sendemail", formDetails)
       .then((res) => {
-        console.log(res);
+        setWasSuccessfullySent(true);
       })
       .catch((err) => {
-        console.log(err);
+        setWasSuccessfullySent(false);
       })
       .finally(() => {
         setIsSending(false);
@@ -47,11 +49,12 @@ const Contact = () => {
     setFormDetails(initialDetails);
   };
 
+  const handleOnClose = () => {
+    setWasSuccessfullySent(null);
+  };
+
   return (
     <Container text style={{ marginTop: "2em" }}>
-      <Dimmer active={isSending}>
-        <Loader>Sending</Loader>
-      </Dimmer>
       <Card style={cardOptions} centered fluid>
         <Card.Content>
           <Header as="h3" icon textAlign="center">
@@ -77,6 +80,9 @@ const Contact = () => {
         </Card.Content>
         <Card.Content>
           <Form inverted id="fonts" onSubmit={handleSubmit}>
+            <Dimmer active={isSending}>
+              <Loader>Sending</Loader>
+            </Dimmer>
             <Form.Group widths="equal">
               <Form.Input
                 id="fonts"
@@ -120,6 +126,19 @@ const Contact = () => {
           </Form>
         </Card.Content>
       </Card>
+      {wasSuccessfullySent === true ? (
+        <CustomModal
+          isError={false}
+          message="Email was successfully sent!"
+          handleOnClose={handleOnClose}
+        />
+      ) : wasSuccessfullySent === false ? (
+        <CustomModal
+          isError={true}
+          message="Email was not sent successfully. Please try again later."
+          handleOnClose={handleOnClose}
+        />
+      ) : null}
     </Container>
   );
 };
