@@ -9,8 +9,6 @@ import {
   Icon,
   Label,
   Progress,
-  Segment,
-  Container,
 } from "semantic-ui-react";
 import getRepos from "../Data/FetchRepos";
 import { cardOptions } from "../Data/StylesOptions";
