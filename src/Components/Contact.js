@@ -9,6 +9,7 @@ import {
   Form,
   Container,
 } from "semantic-ui-react";
+import axios from "axios";
 
 const initialDetails = {
   firstName: "",
@@ -28,6 +29,18 @@ const Contact = () => {
 
   const handleSubmit = () => {
     console.log(formDetails);
+
+    axios
+      .post("/api/sendemail", {
+        client: "This is the client!",
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
     setFormDetails(initialDetails);
   };
 
@@ -96,7 +109,7 @@ const Contact = () => {
               value={formDetails.message}
             />
             <Form.Button fluid id="fonts" color="blue">
-              Submit
+              Send
             </Form.Button>
           </Form>
         </Card.Content>
