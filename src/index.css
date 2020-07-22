@@ -21,3 +21,9 @@ body #fonts {
   background: -webkit-linear-gradient(to bottom, #004e92, #000428);
   background: linear-gradient(to bottom, #004e92, #000428);
 }
+
+.ui.inverted.form input[type="text"],
+.ui.form textarea {
+  background-color: transparent !important;
+  border: 2px solid #004e92;
+}
