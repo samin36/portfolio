@@ -1,6 +1,6 @@
 import React from "react";
 import { Header, Divider, Button, Card, List, Image } from "semantic-ui-react";
-import Pdf from "../Data/resume.pdf";
+import resume from "../Data/resume.pdf";
 import { coursesTaken, internshipExperience } from "../Data/AboutMeData";
 import { cardOptions, listOptions } from "../Data/StylesOptions";
 
@@ -54,7 +54,7 @@ const AboutMe = () => {
             size="large"
             id="font-fam"
             as="a"
-            href={Pdf}
+            href={resume}
             target="_blank"
           >
             Resume
