@@ -25,6 +25,7 @@ const Contact = () => {
   const [formDetails, setFormDetails] = useState(initialDetails);
   const [isSending, setIsSending] = useState(false);
   const [wasSuccessfullySent, setWasSuccessfullySent] = useState(null);
+  const [isValidEmail, setIsValidEmail] = useState(true);
 
   const handleChange = (e, { name, value }) => {
     setFormDetails((prevState) => {
@@ -32,21 +33,30 @@ const Contact = () => {
     });
   };
 
-  const handleSubmit = () => {
-    setIsSending(true);
-    axios
-      .post("/api/sendemail", formDetails)
-      .then((res) => {
-        setWasSuccessfullySent(true);
-      })
-      .catch((err) => {
-        setWasSuccessfullySent(false);
-      })
-      .finally(() => {
-        setIsSending(false);
-      });
+  const handleSubmit = (e) => {
+    if (validateEmail()) {
+      setIsValidEmail(true);
+      setIsSending(true);
+      axios
+        .post("/api/sendemail", formDetails)
+        .then((res) => {
+          setWasSuccessfullySent(true);
+        })
+        .catch((err) => {
+          setWasSuccessfullySent(false);
+        })
+        .finally(() => {
+          setIsSending(false);
+        });
+      setFormDetails(initialDetails);
+    } else {
+      setIsValidEmail(false);
+    }
+  };
 
-    setFormDetails(initialDetails);
+  const validateEmail = () => {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(formDetails.email).toLowerCase());
   };
 
   const handleOnClose = () => {
@@ -111,6 +121,12 @@ const Contact = () => {
               required
               onChange={handleChange}
               value={formDetails.email}
+              error={
+                !isValidEmail && {
+                  content: "Please enter a valid email",
+                  pointing: "above",
+                }
+              }
             />
             <Form.TextArea
               id="fonts"
